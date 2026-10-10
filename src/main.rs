@@ -1101,7 +1101,8 @@ impl Monitor {
 
 impl eframe::App for Monitor {
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
-        self.leer_puertos.store(!self.compacto, Ordering::Relaxed);
+        let minimizada = ui.ctx().input(|i| i.viewport().minimized.unwrap_or(false));
+        self.leer_puertos.store(!self.compacto && !minimizada, Ordering::Relaxed);
         self.recibir();
 
         let atajo = ui.ctx().input_mut(|i| i.consume_shortcut(&ATAJO_COMPACTO));
