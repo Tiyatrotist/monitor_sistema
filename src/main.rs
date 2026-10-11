@@ -1236,7 +1236,9 @@ mod tests {
             es_dev: true,
         };
         monitor.puertos = Some(Ok(vec![p1.clone(), p2.clone(), p3.clone()]));
-        monitor.en_curso.insert((1234, 1000), EstadoCierre::Cerrando);
+        monitor
+            .en_curso
+            .insert((1234, 1000), EstadoCierre::Cerrando);
 
         monitor.procesar_cierre(p1, false, crate::puertos::ResultadoCierre::Cerrado);
 
